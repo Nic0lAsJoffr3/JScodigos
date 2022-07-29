@@ -50,31 +50,10 @@ body{
   <nav>
 
 <fieldset>
-  <h3>Tempo para acabar a aula:</h3>
-  <h5 id="END_aula">...</h5>
-  
-  
-  <script>
-    update47();
-    function update47(){
-      
 
-      
-      var data_time = new Date();
-      var data_minutos = data_time.getMinutes();
-      var data_horas = data_time.getHours();
-     
-      tempoH_restante = ((data_minutos>=25?15:16)-(data_horas));
-      
-      
- tempoM_restante=(60-data_minutos+(data_horas > 15 && data_horas <17?0:25))-(data_horas<16?0:35);
- timeee = data_horas+""+data_minutos;
- 
-      document.getElementById("END_aula").innerHTML =(timeee >= 730 && timeee <=1625?(tempoH_restante+":"+tempoM_restante):"Não a aula neste momento do dia.");
-      
-      setTimeout(update47,1);
-    }
-  </script>
+  
+  
+  
 </fieldset>
 
 </nav>
