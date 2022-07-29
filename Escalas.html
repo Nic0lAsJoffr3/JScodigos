@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <title></title>
+<style>
+  
+  
+</style>
+</head>
+
+<body onload="caucular();">
+  <fieldset>
+    <h1 id="titulo">Escalas de temperatura</h1>
+<input value="0" id="nunber"type="number"><select id="op">
+  <option value="c">°C</option></option><option value="f"> F</option><option value="k"> K</option>
+</select> <br>
+<br>
+
+<h3 id="titulo2">temperaturas</h3>
+<i id="cE">0</i>°C<br>
+<i id="fE">0</i> F<br>
+<i id="kE">0</i> K<br><a href="Index.html">Voltar</a>
+
+<script>
+  var C = 0 
+  var F = 0
+  var K = 0
+
+  function caucular(){
+    
+  if(document.getElementById("op").value == "c"){
+    C = document.getElementById("nunber").value
+    F = (C * 1.8)+32
+    K = (C *1)+273
+    
+  }
+   
+  if(document.getElementById("op").value == "f"){
+    F = document.getElementById("nunber").value
+    C = (F -32)/1.8
+    K = (C *1)+273
+    
+  }
+   
+  if(document.getElementById("op").value == "k"){
+    K = document.getElementById("nunber").value
+    C = (K - 273)
+    F = (C * 1.8)-32
+    
+  }
+    document.getElementById("cE").innerHTML = C;
+    
+    document.getElementById("fE").innerHTML = F;
+    
+    document.getElementById("kE").innerHTML = K;
+  
+      setTimeout(caucular,1)
+      }
+  
+</script>
+  </fieldset>
+</body>
+
+</html>
