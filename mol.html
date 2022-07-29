@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <title></title>
+  <style>
+  
+  body{
+    
+       background-image: linear-gradient(-90deg,#434242,#6B716B ,#434242);
+   
+  }
+    .quant {
+      font-size: 12px;
+
+
+    }
+    fieldset{
+      border: 1px white dashed;
+    }
+  
+    .ato{
+      font-size: 22px;
+      width: 30px;
+      height: 30px;
+      background-image:linear-gradient(#A1A1A1,#666666,#666464);
+      text-align: center;
+      
+    }
+    .u1, .u2, .u3, .u4,.u{
+      font-size: 22px;
+      background-color: transparent;
+      border-radius: 8%;
+    }
+    
+    .u{
+      margin-right: 10px;
+      border-radius:30%;
+      background-color: rgba(0, 0, 0, .15);
+      font-size:19px;
+      text-align: center;
+    }
+    .u1{
+      font-size: 30px;
+    }
+    .u4{
+      margin-top: 20px;
+      font-size:30px;
+    }
+    label{
+      font-size: 17px;
+      
+      background-color:rgba(255,255,255,.1);
+    }
+    .atomo {
+      
+      border: none;
+      border-bottom: 2px rgba(255,255,255,.8) solid;
+      border-left: 3px rgba(255,255,255,.7) solid;
+      border-right: 3px rgba(255,255,255,.7) solid;
+      margin-top: 16px;
+      font-size: 19px;
+      width: 120px;
+      height: 120px;
+      
+      
+    }
+    .atomo input{
+      width: 28px;
+      height: 28px;
+      background-image:linear-gradient(#C2C2C2,#666666,#666464);
+      border-radius: 50%;
+      text-align: center;
+      transform: translate(70px,0px);
+   
+    }
+    
+    .atomo input:focus,.ato:focus{
+      
+      width: 35px;
+      height: 35px;
+      font-size: 25px;
+      border: none;
+      outline: none;
+      background-image:linear-gradient(#95CEB5,#6FBC63,#1E575B);
+    }
+    .atomo select:focus{
+      
+      width: 45px;
+      height: 45px;
+      font-size: 25px;
+      border: none;
+      outline: none;
+      background-image:linear-gradient(#95CEB5,#6FBC63,#1E575B);
+    }
+    .atomo select {
+      
+      width: 40px;
+      height: 40px;
+      background-image:linear-gradient(#C2C2C2,#666666,#666464);
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      transform: translate(35%,-280px);
+      appearance: none;
+      
+      transform: translate(30px,10px);
+    }
+
+  .atomo  legend{
+      color: rgba(255,255,255,.8);
+      text-decoration: underline;
+      font-size: 25px;
+      text-align: center;
+     
+    }
+ 
+    .u2,.u3 {
+    
+      font-size: 20px;
+      color: rgba(255, 255, 255, .5);
+      background-color: rgba(0, 0, 0, .05);
+    }
+    .moleculas{
+      display: grid;
+      grid-template-columns: 20px 20px 20px;
+    }
+ 
+  </style>
+</head>
+
+<body>
+
+  <fieldset>
+    <h1 id="titulo">MOL</h1>
+    <fieldset> <br>
+      <legend>Estrutura</legend>
+<label for="quantidade">Número de átomos:</label>
+      <input class="ato" type="number" value="1" min="1" id="quantidade">
+
+
+    </fieldset>
+    <fieldset>
+      <legend>Informação</legend>
+      <div id="moleculas"></div>
+
+
+    </fieldset>
+    <fieldset>
+      <legend>Cálculo</legend>
+      
+    
+    
+    <i id="conta01" class="u1"></i><br>
+    
+    <label for="conta02" class="u2">u = </label><i id="conta02" class="u2"></i><br>
+    
+   
+    <label for="conta03" class="u3">u = </label> <i id="conta03" class="u3"></i><br>
+   
+    <label for="resultado" class="u">u = </label>  <i id="resultado" class="u4"></i><br>
+    </fieldset>
+    <script id="script_m">
+    </script>
+    <script id="script_mc">
+
+    </script>
+    <br>
+
+    <br>
+    <a href="Index.html">Voltar</a>
+  </fieldset>
+
+  <script>
+    update_u();
+
+    var anti_molecula = 1;
+    var moleculas = 1;
+    var moleculas2 = 1;
+    var moleculas_atuais = 0;
+    var moleculas_re = 0;
+    var mudanca = false;
+    var options = '';
+    var massa_do_atomo = 0;
+    var massa_dos_atomos = 0;
+    var massa_da_molecula = 0;
+    //tabela
+    function update_u() {
+      
+      moleculas = document.getElementById("quantidade").value;
+      options = '<option value="H">H' + '<option value="He">He' + '<option value="Li">Li' + '<option value="Be">Be' + '<option value="B">B' + '<option value="C">C' + '<option value="N">N' +  '<option value="O">O'+ '<option value="F">F' + '<option value="Ne">Ne' + '<option value="Na">Na' + '<option value="Mg">Mg' + '<option value="Al">Al' + '<option value="Si">Si' + '<option value="P">P' + '<option value="S">S' + '<option value="Cl">Cl' + '<option value="Ar">Ar' + '<option value="K">K' + '<option value="Ca">Ca' + '<option value="Sc">Sc' + '<option value="Ti">Ti' + '<option value="V">V' + '<option value="Cr">Cr' + '<option value="Mn">Mn' + '<option value="Fe">Fe' + '<option value="Co">Co' + '<option value="Ni">Ni' + '<option value="Cu">Cu' + '<option value="Zn">Zn' + '<option value="Ga">Ga' + '<option value="Ge">Ge' + '<option value="As">As' + '<option value="Se">Se' + '<option value="Br">Br' + '<option value="Kr">Kr' + '<option value="Rb">Rb' + '<option value="Sr">Sr' + '<option value="Y">Y' + '<option value="Zr">Zr' + '<option value="Nb">Nb' + '<option value="Mo">Mo' + '<option value="Tc">Tc' + '<option value="Ru">Ru' + '<option value="Rh">Rh' + '<option value="Pd">Pd' + '<option value="Ag">Ag' + '<option value="Cd">Cd' + '<option value="In">In' + '<option value="Sn">Sn' + '<option value="Sb">Sb' + '<option value="Te">Te' + '<option value="I">I' + '<option value="Xe">Xe' + '<option value="Cs">Cs' + '<option value="Ba">Ba' + '<option value="La">La' + '<option value="Ce">Ce' + '<option value="Pr">Pr' + '<option value="Nd">Nd' + '<option value="Pm">Pm' + '<option value="Sm">Sm' + '<option value="Eu">Eu' + '<option value="Gd">Gd' + '<option value="Tb">Tb' + '<option value="Dy">Dy' + '<option value="Ho">Ho' + '<option value="Er">Er' + '<option value="Tm">Tm' + '<option value="Yb">Yb' + '<option value="Lu">Lu' + '<option value="Hf">Hf' + '<option value="Ta">Ta' + '<option value="W">W' + '<option value="Re">Re' + '<option value="Os">Os' + '<option value="Ir">Ir' + '<option value="Pt">Pt' + '<option value="Au">Au' + '<option value="Hg">Hg' + '<option value="Tl">Tl' + '<option value="Pb">Pb' + '<option value="Bi">Bi' + '<option value="Po">Po' + '<option value="At">At' + '<option value="Rn">Rn' + '<option value="Fr">Fr' + '<option value="Ra">Ra' + '<option value="Ac">Ac' + '<option value="Th">Th' + '<option value="Pa">Pa' + '<option value="U">U' + '<option value="Np">Np' + '<option value="Pu">Pu' + '<option value="Am">Am' + '<option value="Cm">Cm' + '<option value="Bk">Bk' + '<option value="Cf">Cf' + '<option value="Es">Es' + '<option value="Fm">Fm' + '<option value="Md">Md' + '<option value="No">No' + '<option value="Lr">Lr' + '<option value="Rf">Rf' + '<option value="Db">Db' + '<option value="Sg">Sg' + '<option value="Bh">Bh' + '<option value="Hs">Hs' + '<option value="Mt">Mt';
+      
+      
+      if (moleculas != anti_molecula) {
+
+        mudanca = true;
+
+      }
+
+
+
+      if (mudanca == true) {
+
+        document.getElementById("moleculas").innerHTML = "";
+        document.getElementById("conta01").innerHTML = "";
+        document.getElementById("script_m").innerHTML = "";
+        document.getElementById("script_mc").innerHTML = "";
+        moleculas_atuais = 1;
+
+        while (moleculas_atuais - 1 < moleculas) {
+
+          document.getElementById("moleculas").innerHTML += '<div class="atomo"><legend>Átomo ' + moleculas_atuais + '</legend><i id="tabela'+moleculas_atuais+'"></i><select  id=atm' + moleculas_atuais + '><br>' + options + '</select><br><input type="number" value="1" id="mi' + moleculas_atuais + '"><br></div>';
+          
+          
+          
+
+
+          moleculas_atuais += 1;
+
+        }
+        anti_molecula = moleculas;
+        mudanca = false;
+      }
+      atz();
+      setTimeout(update_u, 1);
+    }
+
+    function atz() {
+      document.getElementById("conta01").innerHTML = "";
+      document.getElementById("conta02").innerHTML = "";
+
+      document.getElementById("conta03").innerHTML = "";
+
+      document.getElementById("resultado").innerHTML = "";
+      massa_da_molecula = 0;
+      moleculas_re = 1;
+      while (moleculas_re - 1 < moleculas) {
+
+        if (document.getElementById("mi" + moleculas_re).value > 1) {
+          document.getElementById("conta01").innerHTML += '<i id="m' + moleculas_re + '">' + document.getElementById("atm" + moleculas_re).value + '<i id="qa' + moleculas_re + '" class="quant">' + document.getElementById("mi" + moleculas_re).value + '</i></i>';
+        }
+        else {
+
+          document.getElementById("conta01").innerHTML += '<i id="m' + moleculas_re + '">' + document.getElementById("atm" + moleculas_re).value + '<i id="qa' + moleculas_re + '"class="quant">' + '</i></i>';
+        }
+
+        //massa dos atomos
+        if (document.getElementById("atm" + moleculas_re).value == "H")
+        {
+          massa_do_atomo = 1;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "He")
+        {
+          massa_do_atomo = 4;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Li")
+        {
+          massa_do_atomo = 7;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Be")
+        {
+          massa_do_atomo = 9;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "B")
+        {
+          massa_do_atomo = 11;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "C")
+        {
+          massa_do_atomo = 12;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "N")
+        {
+          massa_do_atomo = 14;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "O")
+        {
+          massa_do_atomo = 16;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "F")
+        {
+          massa_do_atomo = 19;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Ne")
+        {
+          massa_do_atomo = 20;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Na")
+        {
+          massa_do_atomo = 23;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Mg")
+        {
+          massa_do_atomo = 24;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Al")
+        {
+          massa_do_atomo = 27;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Si")
+        {
+          massa_do_atomo = 28;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "P")
+        {
+          massa_do_atomo = 31;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "S")
+        {
+          massa_do_atomo = 32;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Cl")
+        {
+          massa_do_atomo = 35;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Ar")
+        {
+          massa_do_atomo = 40;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "K")
+        {
+          massa_do_atomo = 39;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Ca")
+        {
+          massa_do_atomo = 40;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Sc")
+        {
+          massa_do_atomo = 45;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "TI")
+        {
+          massa_do_atomo = 48;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "V")
+        {
+          massa_do_atomo = 51;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Cr")
+        {
+          massa_do_atomo = 52;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Mn")
+        {
+          massa_do_atomo = 55;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Fe")
+        {
+          massa_do_atomo = 56;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Co")
+        {
+          massa_do_atomo = 59;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Ni")
+        {
+          massa_do_atomo = 59;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Cu")
+        {
+          massa_do_atomo = 64;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Zn")
+        {
+          massa_do_atomo = 65;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Ga")
+        {
+          massa_do_atomo = 70;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Ge")
+        {
+          massa_do_atomo = 73;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "As")
+        {
+          massa_do_atomo = 75;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Se")
+        {
+          massa_do_atomo = 79;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Br")
+        {
+          massa_do_atomo = 80;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Kr")
+        {
+          massa_do_atomo = 84;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Rb")
+        {
+          massa_do_atomo = 85;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Sr")
+        {
+          massa_do_atomo = 88;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Y")
+        {
+          massa_do_atomo = 89;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Zr")
+        {
+          massa_do_atomo = 91;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Nb")
+        {
+          massa_do_atomo = 93;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Mo")
+        {
+          massa_do_atomo = 96;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Tc")
+        {
+          massa_do_atomo = 98;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Ru")
+        {
+          massa_do_atomo = 102;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Rh")
+        {
+          massa_do_atomo = 103;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Pd")
+        {
+          massa_do_atomo = 106;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Ag")
+        {
+          massa_do_atomo = 108;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Cd")
+        {
+          massa_do_atomo = 112;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "In")
+        {
+          massa_do_atomo = 115;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Sn")
+        {
+          massa_do_atomo = 119;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Sb")
+        {
+          massa_do_atomo = 123;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Te")
+        {
+          massa_do_atomo = 128;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "I")
+        {
+          massa_do_atomo = 127;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Xe")
+        {
+          massa_do_atomo = 131;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Cs")
+        {
+          massa_do_atomo = 133;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Ba")
+        {
+          massa_do_atomo = 137;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "La")
+        {
+          massa_do_atomo = 139;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Ce")
+        {
+          massa_do_atomo = 140;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Pr")
+        {
+          massa_do_atomo = 141;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Nd")
+        {
+          massa_do_atomo = 144;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Pm")
+        {
+          massa_do_atomo = 145;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Sm")
+        {
+          massa_do_atomo = 150;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Eu")
+        {
+          massa_do_atomo = 152;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Gd")
+        {
+          massa_do_atomo = 157;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Tb")
+        {
+          massa_do_atomo = 159;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Dy")
+        {
+          massa_do_atomo = 163;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Ho")
+        {
+          massa_do_atomo = 165;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Er")
+        {
+          massa_do_atomo = 167;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Tm")
+        {
+          massa_do_atomo = 169;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Yb")
+        {
+          massa_do_atomo = 173;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Lu")
+        {
+          massa_do_atomo = 175;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Hf")
+        {
+          massa_do_atomo = 178;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Ta")
+        {
+          massa_do_atomo = 181;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "W")
+        {
+          massa_do_atomo = 184;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Re")
+        {
+          massa_do_atomo = 186;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Os")
+        {
+          massa_do_atomo = 190;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Ir")
+        {
+          massa_do_atomo = 192;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Pt")
+        {
+          massa_do_atomo = 195;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Au")
+        {
+          massa_do_atomo = 197;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Hg")
+        {
+          massa_do_atomo = 201;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Tl")
+        {
+          massa_do_atomo = 204;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Pb")
+        {
+          massa_do_atomo = 207;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Bi")
+        {
+          massa_do_atomo = 209;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Po")
+        {
+          massa_do_atomo = 209;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "At")
+        {
+          massa_do_atomo = 210;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Rn")
+        {
+          massa_do_atomo = 222;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Fr")
+        {
+          massa_do_atomo = 223;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Ra")
+        {
+          massa_do_atomo = 226;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Ac")
+        {
+          massa_do_atomo = 227;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Th")
+        {
+          massa_do_atomo = 232;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Pa")
+        {
+          massa_do_atomo = 231;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "U")
+        {
+          massa_do_atomo = 238;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Np")
+        {
+          massa_do_atomo = 237;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Pu")
+        {
+          massa_do_atomo = 244;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Am")
+        {
+          massa_do_atomo = 243;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Cm")
+        {
+          massa_do_atomo = 247;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Bk")
+        {
+          massa_do_atomo = 247;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Cf")
+        {
+          massa_do_atomo = 251;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Es")
+        {
+          massa_do_atomo = 252;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Fm")
+        {
+          massa_do_atomo = 257;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Md")
+        {
+          massa_do_atomo = 258;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "No")
+        {
+          massa_do_atomo = 259;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Lr")
+        {
+          massa_do_atomo = 262;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Rf")
+        {
+          massa_do_atomo = 267;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Db")
+        {
+          massa_do_atomo = 268;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Sg")
+        {
+          massa_do_atomo = 269;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Bh")
+        {
+          massa_do_atomo = 270;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Hs")
+        {
+          massa_do_atomo = 269;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Mt")
+        {
+          massa_do_atomo = 278;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Ds")
+        {
+          massa_do_atomo = 281;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Rg")
+        {
+          massa_do_atomo = 281;
+        }
+
+        if (document.getElementById("atm" + moleculas_re).value == "Cn")
+        {
+          massa_do_atomo = 285;
+        }
+
+        if (document.getElementById("atm" + moleculas_re).value == "Nh")
+        {
+          massa_do_atomo = 286;
+        }
+
+        if (document.getElementById("atm" + moleculas_re).value == "Fl")
+        {
+          massa_do_atomo = 289;
+        }
+
+        if (document.getElementById("atm" + moleculas_re).value == "Mc")
+        {
+          massa_do_atomo = 288;
+        }
+
+        if (document.getElementById("atm" + moleculas_re).value == "Lv")
+        {
+          massa_do_atomo = 293;
+        }
+
+        if (document.getElementById("atm" + moleculas_re).value == "Ts")
+        {
+          massa_do_atomo = 294;
+        }
+        if (document.getElementById("atm" + moleculas_re).value == "Og")
+        {
+          massa_do_atomo = 294;
+        }
+
+        //-----
+
+
+
+
+
+
+        document.getElementById("conta02").innerHTML += '<i id="m2-' + moleculas_re + '">(' + massa_do_atomo + ' x <i id="qa2-' + moleculas_re + '" >' + document.getElementById("mi" + moleculas_re).value + ')</i></i>';
+        if (moleculas_re < moleculas) {
+          document.getElementById("conta02").innerHTML += " + ";
+        }
+        massa_dos_atomos = massa_do_atomo * document.getElementById("mi" + moleculas_re).value
+
+        document.getElementById("conta03").innerHTML += massa_dos_atomos;
+        if (moleculas_re < moleculas) {
+          document.getElementById("conta03").innerHTML += " + ";
+        }
+        massa_da_molecula += massa_dos_atomos;
+
+        moleculas_re += 1;
+      }
+
+      if (moleculas_re - 1 == moleculas) {
+
+}
+     
+      document.getElementById("resultado").innerHTML += massa_da_molecula;
+
+}
+  </script>
+  
+</body>
+
+</html>
