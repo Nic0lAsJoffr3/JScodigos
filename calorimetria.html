@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="style.css">
+  <title></title>
+</head>
+
+<body>
+  
+<h1 id="titulo">Calorimetria</h1><br>
+
+<fieldset>
+  <h2 id="titulo2">Calor sensível</h2>
+  
+ Q = <i id="conta_m">M</i> . <i id="conta_c">C</i> . <i id="conta_delta">∆Θ</i><br><i id="res">Q = ?</i><br>
+  
+  <br>
+  <br>
+  <br>
+   <input id="m" type="Number" placeholder="M"><br>
+   <input id="c" type="Number" placeholder="C"><br>
+   <input id="min" type="Number" placeholder="menor ∆Θ" >
+  <input id="max" type="Number" placeholder="maior ∆Θ"><br>
+  <i id="com">
+    
+  </i><br>
+  
+</fieldset>
+  
+<fieldset>
+  <h2 id="titulo2">Calor latente</h2>
+  
+ Q = <i id="conta_m2">M</i> . <i id="conta_l2">L</i> <br><i id="res2">Q = ?</i><br>
+  
+  <br>
+  <br>
+  <br>
+   <input id="m2" type="Number" placeholder="M"><br>
+   <input id="l2" type="Number" placeholder="L"><br>
+   
+    
+  <i id="com2">
+    
+  </i><br>
+  
+  
+</fieldset>
+  
+  <script>
+    var m =0
+    var c =0
+    var min =0
+    var max =0
+    var delta = 0
+    var Q = 0
+    
+    var m2 = 0
+    var l2 = 0
+    var q2 = 0
+    
+    
+    update()
+    function update(){
+      m = document.getElementById("m").value;
+      c = document.getElementById("c").value;
+      min = document.getElementById("min").value;
+      max = document.getElementById("max").value;
+       m2 = document.getElementById("m2").value;
+      l2 = document.getElementById("l2").value;
+     
+      if(m != ""){
+        document.getElementById("conta_m").innerHTML = m
+      }
+      else{
+        
+      
+        document.getElementById("conta_m").innerHTML = "M"
+      }if (c != "") {
+        document.getElementById("conta_c").innerHTML = c
+      }
+      else {
+      
+      
+        document.getElementById("conta_c").innerHTML = "C"
+      }
+      if(m2 != ""){
+        document.getElementById("conta_m2").innerHTML = m2
+      }
+      else{
+        
+      
+        document.getElementById("conta_m2").innerHTML = "M"
+      }if (l2 != "") {
+        document.getElementById("conta_l2").innerHTML = l2
+      }
+      else {
+      
+      
+        document.getElementById("conta_l2").innerHTML = "L"
+      }
+      if(min != "" && max != ""){
+        document.getElementById("conta_delta").innerHTML = "( "+min+" - "+max+" )"
+      }
+      else{
+        
+      
+        document.getElementById("conta_delta").innerHTML = "∆Θ"
+      }
+      
+      if(m2 != "" && l2 != ""){
+        document.getElementById("com2").innerHTML =''
+        cal2();
+      }
+      else{
+   
+        
+      document.getElementById("res2").innerHTML = "Q = ?"
+      }
+      
+      
+      
+      if(m != "" && c != "" && min != "" && max != ""){
+        document.getElementById("com").innerHTML =''
+        cal1();
+      }
+      else{
+        
+        
+      document.getElementById("res").innerHTML = "Q = ?"
+      }
+      
+    
+      setTimeout(update,1)
+      }
+    
+    function cal1(){
+      delta = min - max
+      Q = ((m * c)*delta)
+      document.getElementById("res").innerHTML = "Q = " + Q + " cal"
+    }
+    
+    
+    function cal2(){
+     
+      q2 = (m2 * l2)
+      document.getElementById("res2").innerHTML = "Q = " + q2 + " cal"
+    }
+  </script>
+  <a href="Index.html">Voltar</a>
+</body>
+
+</html>
