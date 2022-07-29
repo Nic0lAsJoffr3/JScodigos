@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="style.css">
+  <title></title>
+  <style>
+    .confg {
+      border: none;
+      border-bottom: 2px silver dashed;
+    }
+
+    fieldset {
+
+      border: 2px silver solid;
+    }
+    body{
+    }
+  </style>
+</head>
+
+<body id="body">
+  <fieldset style="min-height: 1000px;">
+    <h1 id="titulon">Gerador de gráfico</h1>
+    <fieldset style="color:rgba(255,255,255,.8);" class="confg">
+      <legend id="titulo2n" style="text-decoration: underline;">Estrutura: </legend>
+      Quantidade de barras:<input style="font-size: 18px;text-align: left;text-decoration: underline;" value="3" id="brs" type="number">
+      <br><button onclick="RD();" style="color:white; background-color: transparent; border: 1px silver dashed; text-decoration:underline; padding: 35px 0px 35px 0px;border-radius:50%; font-size:12.5px;">Reiniciar gráfico</button>
+           <button onclick="RP();" style="color:white; background-color: transparent; border: 1px silver dashed; text-decoration:underline; padding: 35px 0px 35px 0px;border-radius:50%; font-size:12.5px;">Reiniciar página</button>
+
+    </fieldset>
+    <fieldset class="confg" id="confg1">
+      
+
+
+    </fieldset>
+    <h2>Grafico: </h2>
+    <fieldset id="gf1" class="confg" style="display:grid; transform: rotateZ(180deg) rotateY(180deg); border: none; border-top: 2px silver dashed;  ">
+
+
+    </fieldset>
+
+  </fieldset>
+</body>
+
+<script src="Grafico.js"></script>
+<script>
+  var ant_brs = 0;
+  var num_brs = 0;
+  var brs = 0;
+  var columns = "7px ";
+  
+  var bgColor_blue="linear-gradient(45deg,rgb(0,20,20),rgb(100,150,150))";
+  var bgColor_red="linear-gradient(45deg,rgb(20,0,0),rgb(200,130,130))";
+  var bgColor_yellow="linear-gradient(45deg,rgb(30,25,0),rgb(300,250,100))";
+  var bgColor_orange="linear-gradient(45deg,rgb(30,18,10),rgb(300,180,100))";
+  var bgColor_green="linear-gradient(45deg,rgb(20,25,0),rgb(190,290,100))";
+  var bgColor_black="linear-gradient(45deg,rgb(10,10,10),rgb(150,150,150))";
+  var bgColor_ = "";
+  var cronometro = 0;
+  document.getElementById("brs").value = (Math.floor(Math.random() * 8) + 10);
+   var cores = [bgColor_blue,bgColor_red,bgColor_black,bgColor_green,bgColor_orange,bgColor_yellow,bgColor_blue];
+   bgColor_ = cores[Math.ceil(Math.random() * (cores.length - 1))];
+  update__();
+
+
+  function update__() {
+  cronometro+=1;
+  if(cronometro > 10000){
+    bgColor_ = cores[Math.ceil(Math.random() * (cores.length - 1))];
+    cronometro = 0;
+  }
+document.body.style.backgroundImage =bgColor_;
+
+    brs = document.getElementById("brs").value;
+
+
+    if (brs != ant_brs) {
+
+
+      document.getElementById("confg1").innerHTML = " ";
+      document.getElementById("gf1").innerHTML = " ";
+      num_brs = 0;
+      ant_brs = brs;
+    }
+
+    while (num_brs < brs) {
+
+      document.getElementById("confg1").innerHTML += '<fieldset style="border:none; border-bottom:1px silver solid;background-image: linear-gradient(70deg,rgba(0,0,0,0.45),rgba(0,0,0,0.1), rgba(0,0,0,0)); color:rgba(200,200,200,1);"><legend style="text-decoration:underline;color:rgba(256,256,256,0.85);border-radius:20%;background-color:rgba(0,0,0,.1); padding:10px 5px 10px 5px;" id="titulo3j">Item ' + (num_brs + 1) + ':</legend><label for="size' + num_brs + '">Tamanho: </label> <input style="margin-left:40px;font-size:17px;" id="size' + num_brs + '" class="item" type="number" value="' + (Math.floor(Math.random() * 46) + 1) + '"><br><label for="color' + num_brs + '">Cor: </label><input style="margin-left:50px;font-size:19px; text-decoration:underline;" id="color' + num_brs + '" type="text" value="' + "rgb(" + Math.floor((Math.random() * 206) + 50) + "," + Math.floor((Math.random() * 206 + 50)) + "," + Math.floor((Math.random() * 206 + 50)) + ")" + '"></fieldset>';
+      columns += "7px 7px ";
+
+      document.getElementById("gf1").style.gridTemplateColumns = columns;
+      document.getElementById("gf1").innerHTML += '<fieldset id="grafico' + num_brs + '" style="display: grid; border:none; width:20%;height:20%; " class="grafico">none</fieldset><br>';
+
+      num_brs += 1;
+    }
+    reset_barras();
+
+    setTimeout(update__, 1);
+  }
+
+  function reset_barras() {
+    var num = 0;
+    while (num < brs) {
+
+      BarraGeration("size" + num, "color" + num, "grafico" + num, "7px ", num, "4px");
+
+      num += 1;
+    }
+  }
+
+  function RD() { document.getElementById("brs").value = "0" }
+  function RP(){location.reload();}
+</script>
+
+</html>
