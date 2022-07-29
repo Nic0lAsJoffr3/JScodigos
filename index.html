@@ -4,14 +4,170 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <link rel="stylesheet" href="style.css">
   <title></title>
+  <style>
+    * {
+      font-family: Arial, Helvetica, sans-serif;
+      
+    }
+    .hora{
+      margin-right: 17px;
+      border:none;
+      
+    }
+body{
+  background: #2D2D2DFC;
+  color: white;
+  
+}
+    .day {
+      font-size: 19px;
+      text-decoration:underline;
+   
+    }
+
+    .aula {
+      background-color: #2B2B2BFC;
+      
+      color: white;
+      text-align: center;
+      margin: 3px 3px 30px 3px;
+      padding: 0px 0px 0px 0px;
+
+    }
+
+    h2 {
+      text-align: center;
+      border-top: 2px #FFFFFFB5 solid;
+      font-size: 25px;
+    }
+
+  </style>
 </head>
 
 <body>
-<h1>teste</H1>
-Oi alan
+  <h1>Informações</h1>
+  <nav>
+
+<fieldset>
+  <h3>Tempo para acabar a aula:</h3>
+  <h5 id="END_aula">...</h5>
+  
+  
+  <script>
+    update47();
+    function update47(){
+      
+
+      
+      var data_time = new Date();
+      var data_minutos = data_time.getMinutes();
+      var data_horas = data_time.getHours();
+     
+      tempoH_restante = ((data_minutos>=25?15:16)-(data_horas));
+      
+      
+ tempoM_restante=(60-data_minutos+(data_horas > 15 && data_horas <17?0:25))-(data_horas<16?0:35);
+ timeee = data_horas+""+data_minutos;
+ 
+      document.getElementById("END_aula").innerHTML =(timeee >= 730 && timeee <=1625?(tempoH_restante+":"+tempoM_restante):"Não a aula neste momento do dia.");
+      
+      setTimeout(update47,1);
+    }
+  </script>
+</fieldset>
+
+</nav>
+<h1>Horário</h2>
+    <nav id="calendario">
+
+    </nav>
+    <script src="dados.js"></script>
+    <script src="horario.js"></script>
+    <script>
+    
+      var horario = [JSON.parse(json[0]), JSON.parse(json[1]), JSON.parse(json[2]), JSON.parse(json[3]), JSON.parse(json[4]), JSON.parse(json[5])];
+      var horas = 0;
+      var minutos = 0;
+      var time = "0000";
+      var dia = "defalt";
+      var aula = "defalt";
+
+      var numberDay = 0;
+      
+      update()
+      var data = new Date();
+      var dia_sem = data.getDay()-1;
+      var Thora = data.getHours();
+      var Tmin = (data.getMinutes() >= 10?data.getMinutes():"0"+data.getMinutes());
+     
+        
+        
+        
+        
+
+      document.getElementById("dia").value =dia_sem;
+      function update() {
+      
+       data = new Date();
+       Thora = data.getHours();
+       Tmin = (data.getMinutes() >= 10?data.getMinutes():"0"+data.getMinutes());
+       dia_sem = data.getDay()-1;
+
+        document.getElementById("calendario").innerHTML = calendario;
+        UPcalendario();
+        hora = Thora;
+        minutos = Tmin;
+        dia =  0;
+        dia= dia_sem;
+        time = (hora.toString() + minutos.toString());
+
+        numberDay = dia_sem;
+
+        UPcalendario();
+
+        aula1 = horario[numberDay].aula.N1.conteudo;
+        aula2 = horario[numberDay].aula.N2.conteudo;
+        aula3 = horario[numberDay].aula.N3.conteudo;
+        aula4 = horario[numberDay].aula.N4.conteudo;
+        aula5 = horario[numberDay].aula.N5.conteudo;
+        aula6 = horario[numberDay].aula.N6.conteudo;
+        aula7 = horario[numberDay].aula.N7.conteudo;
+        aula8 = horario[numberDay].aula.N8.conteudo;
+        aula9 = horario[numberDay].aula.N9.conteudo;
+        intervalo = horario[5].aula.intervalo;
+        notAula = horario[5].aula.not;
+        setTimeout(filtro,1);
+        setTimeout(update, 1);
+      }
+
+      function filtro() {
+        UPcalendario();
+
+        document.getElementById("calendario").innerHTML = calendario;
+        UPcalendario();
+
+        if (time >= 730 && time < 815) { horario[numberDay].aula.N1.conteudo = "<i class='day'>" + horario[numberDay].aula.N1.conteudo + "</i>"; } else { horario[numberDay].aula.N1.conteudo = horario[numberDay].aula.N1.conteudo.replace("class='day'", "") }
+        if (time >= 815 && time < 900) { horario[numberDay].aula.N2.conteudo = "<i class='day'>" + horario[numberDay].aula.N2.conteudo + "</i>"; } else { horario[numberDay].aula.N2.conteudo = horario[numberDay].aula.N2.conteudo.replace("class='day'", "") }
+        if (time >= 900 && time < 945) { horario[numberDay].aula.N3.conteudo = "<i class='day'>" + horario[numberDay].aula.N3.conteudo + "</i>"; } else { horario[numberDay].aula.N3.conteudo = horario[numberDay].aula.N3.conteudo.replace("class='day'", "") }
+        if (time >= 1005 && time < 1050) { horario[numberDay].aula.N4.conteudo = "<i class='day'>" + horario[numberDay].aula.N4.conteudo + "</i>"; } else { horario[numberDay].aula.N4.conteudo = horario[numberDay].aula.N4.conteudo.replace("class='day'", "") }
+        if (time >= 1050 && time < 1135) { horario[numberDay].aula.N5.conteudo = "<i class='day'>" + horario[numberDay].aula.N5.conteudo + "</i>"; } else { horario[numberDay].aula.N5.conteudo = horario[numberDay].aula.N5.conteudo.replace("class='day'", "") }
+        if (time >= 1135 && time < 1220) { horario[numberDay].aula.N6.conteudo = "<i class='day'>" + horario[numberDay].aula.N6.conteudo + "</i>"; } else { horario[numberDay].aula.N6.conteudo = horario[numberDay].aula.N6.conteudo.replace("class='day'", "") }
+        if (time >= 1340 && time < 1435) { horario[numberDay].aula.N7.conteudo = "<i class='day'>" + horario[numberDay].aula.N7.conteudo + "</i>"; } else { horario[numberDay].aula.N7.conteudo = horario[numberDay].aula.N7.conteudo.replace("class='day'", "") }
+        if (time >= 1435 && time < 1520) { horario[numberDay].aula.N8.conteudo = "<i class='day'>" + horario[numberDay].aula.N8.conteudo + "</i>"; } else { horario[numberDay].aula.N8.conteudo = horario[numberDay].aula.N8.conteudo.replace("class='day'", "") }
+        if (time >= 1520 && time < 1605) { horario[numberDay].aula.N9.conteudo = "<i class='day'>" + horario[numberDay].aula.N9.conteudo + "</i>"; } else { horario[numberDay].aula.N9.conteudo = horario[numberDay].aula.N9.conteudo.replace("class='day'", "") }
+
+
+
+        aula = (time >= 730 && time < 815 ? aula1 : time >= 815 && time < 900 ? aula2 : time >= 900 && time <= 945 ? aula3 : time >= 1005 && time < 1050 ? aula4 : time >= 1050 && time < 1135 ? aula5 : time >= 1135 && time <= 1220 ? aula6 : time >= 1340 && time < 1435 ? aula7 : time >= 1435 && time < 1520 ? aula8 : time >= 1520 && time <= 1605 ? aula9 : (time > 945 && time < 1625 ? intervalo : notAula));
+        UPcalendario();
+        document.getElementById("calendario").innerHTML = calendario;
+      }
+    </script>
+
+
+
+  </nav>
 </body>
 
 </html>
