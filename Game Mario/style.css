@@ -1,0 +1,204 @@
+*{
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.game{
+  width: 100%;
+  height: 550px;
+  
+  background-image: linear-gradient(#82AFCF,#E6FEFF,#E6FEFF);
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 90px #00C31C solid;
+}
+body{
+  background-image: linear-gradient(#00C31C,#00B21A,#008713,#00690F);
+}
+.escuro{
+  width: 100%;
+  height: 100%;
+  
+  position: absolute;
+  z-index: 9997;
+  animation: black 50s 15s infinite linear;
+}
+.clouds{
+  position: absolute;
+  width: 400px;
+  animation: clouds 25s infinite linear;
+  z-index: 2;
+}
+.pipe{
+  bottom: 0;
+  width: 75px;
+position: absolute;
+right: -100px;
+  animation: pipe_anim 1.9s 2.7s infinite linear ;
+  z-index: 2;
+}
+.mario{
+  width: 145px;
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+}
+.time{
+  margin-left: 5%;
+  font-size: 30px;
+  color:white;
+  text-shadow: 4 4 4 #000000;
+  position: absolute;
+  z-index: 9998
+}
+
+.game-over{
+  margin: 0;
+  padding: 0;
+  background-color: #EA000038;
+  width: 100%;
+  height: 100%;
+  border: 10px #FF0000 solid;
+  display: none;
+  position: absolute;
+  z-index: 9999;
+  
+}
+.game-over h1{
+  margin: 0;
+  left: 30%;
+  font-size: 40px;
+  color:#FFFFFF;
+  bottom: 55%;
+  position: absolute;
+  
+}
+.game-over h1, .game-over h2, .game-over a{
+  background-color: #FF1D1DBA;
+  border: 4px red dashed;
+  
+}
+#nic{
+  background-color: transparent;
+  bottom: 0;
+  font-size: 29px;
+  margin-bottom: 20px;
+  margin-left:20px;
+  position: absolute;
+  color:white;
+  z-index: 9998;
+}
+.game-over h2{
+
+  margin: 0;
+  left: 30%;
+  font-size: 30px;
+  color:#FFFFFF;
+  bottom: 50%;
+  position: absolute;
+}
+.game-over a{
+
+  margin: 0;
+  left: 31%;
+  font-size: 29px;
+  color:#FFFFFF;
+  bottom: 45%;
+  position: absolute;
+}
+.jump{
+  
+  animation: jump_mario_anim 500ms;
+}
+@keyframes clouds{
+  from{
+    right: -100%;
+  }
+  to{
+    right:100%;
+  }
+}
+@keyframes jump_mario_anim{
+  from{
+    bottom: 0;
+  }
+  40%{
+    bottom: 300px;
+  }
+  50%{
+    bottom: 300px;
+  }
+  60%{
+    bottom: 300px;
+  }
+  to{
+    bottom: 0;
+  }
+  
+}
+@keyframes pipe_anim{
+  from{
+    right:-150%;
+  }
+  to{
+    right: 100%;
+  }
+  
+}
+@keyframes hard{
+  from{
+    transform: rotate(0deg);
+  }
+  20%{
+    transform: rotate(7deg);
+  }
+  
+  25%{
+    transform: rotate(0deg);
+  }
+  47%{
+    
+    transform: rotate(-2deg);
+  }
+  48%{
+    
+    transform: rotate(2deg);
+  }
+  49%{
+    
+    transform: rotate(0deg);
+  }
+  50%{
+    
+    transform: rotate(-2deg);
+  }
+  51%{
+    
+    transform: rotate(2deg);
+  }
+  75%{
+    transform: rotate(0deg);
+  }
+  80%{
+    transform: rotate(-7deg);
+  }
+  to{
+    transform: rotate(0deg);
+  }
+}
+@keyframes black{
+  from{
+    background-color: transparent;
+  }
+  45%{
+    background-color:#000000E8;
+  }
+  50%{
+    background-color: #000000E8;
+  }
+  to{
+    background-color: transparent;
+  }
+}
