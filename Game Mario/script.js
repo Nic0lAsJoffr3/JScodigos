@@ -69,7 +69,7 @@ setTimeout(() => {
       clouds.style.animation = 'none';
       clouds.style.left = `${cloudsPosition}px`;
 
-      mario.src = 'image/game-over.png';
+      mario.src = 'Image/game-over.png';
       mario.style.width = '75px';
       mario.style.marginLeft = '50px';
       document.querySelector(".game-over").style.display = "block";
