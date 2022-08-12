@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Logando</title>
+  <style>
+  body{
+   background-color: #D8D8D8;
+   font-family: Arial;
+  }
+    .folha{
+      
+      height: 800px;
+      background-color: #FFFCF1;
+      box-shadow: 1px 1px 2px black;
+      overflow: hidden;
+    }
+    input, button,body,p,i,a,h3{
+      background-color: #FFFFFF26;
+      border: none;
+      border-top: 1px solid #A8DAFF;
+      border-bottom: 1px solid #A8DAFF;
+   font-size:16px;
+   margin: 0px;
+   padding: 0px;
+     margin-bottom:0px;
+      width: 100%;
+     font-style: italic;
+     color:#001852E6;
+    }
+    button,a{
+      text-align: left;
+      text-decoration: underline;
+      text-decoration-color: red;
+      font-size: 16px;
+    }
+    
+  </style>
+</head>
+
+<body>
+  <nav class="folha">
+  <div id="formulario">
+</div>
+</nav>
+<script>
+  
+           localStorage.setItem("nome","Nicolas");
+    var nome="";
+    var sobrenome="";
+  function Save(){
+    senha = document.getElementById("senha").value;
+    if(senha=="N31S" && document.getElementById("nome").value.length >= 1 && document.getElementById("Snome").value.length >= 1){
+    nome=document.getElementById("nome").value;
+    sobrenome =document.getElementById("Snome").value;
+    
+    
+    localStorage.setItem("nome",nome);
+    localStorage.setItem("Snome",sobrenome);
+    localStorage.setItem("senha",senha);
+  }
+  else if(document.getElementById("nome").value.length <= 0){
+    document.getElementById("nome").focus();
+  }
+  else if(document.getElementById("Snome").value.length <= 0){
+    document.getElementById("Snome").focus();
+  }
+  else if(document.getElementById("senha").value.length <= 0){
+    document.getElementById("senha").focus();
+  }
+  else if(document.getElementById("senha").value != "N31S"){
+    alert("Senha incorreta, tente novamente")
+    document.getElementById("senha").focus();
+  }
+  }
+  loop =setInterval(()=>{
+    if(localStorage.getItem("nome") != "null" && localStorage.getItem("nome") != "notName" ){
+      
+      nome=localStorage.getItem("nome");
+      
+      document.getElementById("formulario").innerHTML =`
+      
+      
+    <h3>  Bem vindo, ${nome} ${sobrenome}!</h3>
+      <a href="exatasnaturais.html">Area de exatas e naturais</a><br>
+      <button onclick="reset();">Sair</button><br>
+      
+      
+      
+      
+      ` 
+      
+    }
+    else if(localStorage.getItem("nome") != "notName"){
+  
+      document.getElementById("formulario").innerHTML = `
+            
+            
+<input type="text" id="nome" placeholder="Nome"></input> <br>
+<input type="text" id="Snome" placeholder="Sobrenome"></input><br>
+<input type="text" id="senha" placeholder="Senha do site"></input> <br>
+<button onclick="Save();">Save</button>
+            
+            
+            `   
+            localStorage.setItem("nome","notName");
+      
+      
+      
+      
+    }
+  },10);
+ function reset(){
+      localStorage.setItem("nome","null");
+    
+    
+  }
+</script>
+</body>
+
+</html>
