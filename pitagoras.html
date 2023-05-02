@@ -168,7 +168,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 </style>
-  
+ 
 </head>
 
 <body>
@@ -202,6 +202,10 @@ input[type=range]:focus::-ms-fill-upper {
     <button class="add" onclick="add(2,-1);">
       <</button> <input value="5" placeholder="Hip." class="iN" type="number" id="Hip"><button class="add" onclick="add(2,1);">></button>
 
+  </fieldset>
+  <fieldset style="width:30%;margin: auto;">
+    <legend>Unidade de medida: </legend>
+    <input value="cm" placeholder="Uni. med." class="iN" id="uni" type="text" >
   </fieldset>
   <fieldset style="width: 50%;">
     <legend>Scala: </legend>
@@ -303,7 +307,7 @@ reset()
 
 
 
-uniM="Cm"
+uniM=document.getElementById("uni").value;
     triangulo.clearRect(0, 0, 1000, 1000)
     
     triangulo.beginPath()
@@ -316,7 +320,7 @@ uniM="Cm"
     triangulo.stroke();
     
     
-    triangulo.font=(13)+"px bold";
+    triangulo.font=(13)+"px Cambria, Cochin, Georgia, Times, 'Times New Roman', serif";
     triangulo.fillText(("Cateto oposto: "+Math.round(co*1000)/1000)+" "+uniM,0,115);
     triangulo.fillText(("Cateto adjacente: "+Math.round(ca*1000)/1000)+" "+uniM,0,130);
 triangulo.fillText(("Hipotenusa: "+Math.round(hi*1000)/1000)+" "+uniM,0,145);
