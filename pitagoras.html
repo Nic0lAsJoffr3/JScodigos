@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>trigonometria</title>
+<style>
+  
+  body {
+    font-size: 15pt;
+}
+canvas{
+  box-shadow: 0px 0px 10px black;
+  width: 100%;
+  margin:auto;
+}
+legend{
+  background-color:white;
+  box-shadow: 0px 0px 10px black;
+  text-align:center;
+  font-size:17px;
+}
+fieldset{
+  
+  box-shadow: 0px 0px 10px black;
+  width: 70%;
+  text-align:center;
+  margin:auto;
+  margin-top: 25px;
+  border: none;
+}
+.ra{
+  display: none;
+}
+.ra:checked+label{
+  text-decoration: underline;
+}
+.iN{
+  
+  width: 25px;
+  height: 25px; 
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid black;
+  margin:0px;
+}
+.add{
+  background:transparent;
+  border:none;
+  font-size:20px;
+  margin-right:-5px;
+  
+}
+datalist {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  writing-mode: horizontal-tb;
+  width: 100%;
+}
+.bloco{
+  
+
+  display:inline;
+  width:43.125%;
+  text-align:center;
+  margin:0;
+}
+option {
+  padding: 0;
+}
+
+input[type="range"] {
+  width: 200px;
+  margin: 0;
+}
+input[type=range] {
+  height: 28px;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000;
+  background: #FFFFFF;
+  border-radius: 0px;
+  border: 1px solid #000000;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 2px solid #000000;
+  height: 20px;
+  width: 1px;
+  border-radius: 7px;
+  background: #FFFFFF;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -11px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #FFFFFF;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 1px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000;
+  background: #FFFFFF;
+  border-radius: 0px;
+  border: 1px solid #000000;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 2px solid #000000;
+  height: 20px;
+  width: 1px;
+  border-radius: 7px;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 1px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px #000000;
+}
+input[type=range]::-ms-fill-upper {
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px #000000;
+}
+input[type=range]::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 0px 0px 0px #000000;
+  border: 2px solid #000000;
+  height: 20px;
+  width: 1px;
+  border-radius: 7px;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #FFFFFF;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #FFFFFF;
+}
+
+</style>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <canvas id="tri">
+
+
+
+  </canvas>
+  <fieldset>
+    <legend>Selecione a incógnita: </legend>
+    <input type="radio" class="ra" name="ic" id="ic1" checked><label for="ic1">Hipotenusa </label><br>
+    <input type="radio" class="ra" name="ic" id="ic2"><label for="ic2">Cateto oposto</label><br>
+    <input type="radio" class="ra" name="ic" id="ic3"><label for="ic3">Cateto adjacente </label>
+
+  </fieldset>
+  <fieldset  id="bl1" class="bloco">
+    <legend>Cateto adjacente: </legend>
+    <button class="add" onclick="add(0,-1);">
+      <</button><input value="4" placeholder="Car. a." class="iN" type="number" id="catA"><button class="add" onclick="add(0,1);">></button>
+
+  </fieldset>
+  <fieldset  id="bl2" class="bloco">
+    <legend>Cateto oposto: </legend>
+    <button class="add" onclick="add(1,-1);">
+      <</button> <input value="5" placeholder="Car. o." class="iN" type="number" id="catO"><button class="add" onclick="add(1,1);">></button>
+
+  </fieldset>
+
+  <fieldset id="bl3" class="bloco">
+    <legend>Hipotenusa: </legend>
+    <button class="add" onclick="add(2,-1);">
+      <</button> <input value="5" placeholder="Hip." class="iN" type="number" id="Hip"><button class="add" onclick="add(2,1);">></button>
+
+  </fieldset>
+  <fieldset style="width: 50%;">
+    <legend>Scala: </legend>
+    <input value="6" max="20" min="1" id="sca" type="range" style="width: 100%;" list="scale">
+
+    <datalist id="scale">
+
+      <option value="1" label="1x"></option>
+      <option value="5" label="5x"></option>
+      <option value="10" label="10x"></option>
+      <option value="15" label="15x"></option>
+      <option value="20" label="20x"></option>
+    </datalist>
+
+  </fieldset>
+</body>
+<script>
+  x = 55
+  y = 0
+  co = 4
+  ca = 40
+  sc = 10;
+  hi = 0
+  at = 0;
+  u = 0;
+  velocidade = 0.1;
+  triangulo = document.getElementById("tri").getContext("2d");
+
+  function add(tipo, valor) {
+   
+    switch(tipo){
+     
+    case 0:
+       ca = ca*1+valor;
+       break
+    case 1:
+       co  = co*1+valor;
+       break
+    case 2:
+        hi =hi*1+ valor;
+        break
+
+    }
+reset()
+
+
+  }
+
+  function reset() {
+
+
+    document.getElementById("Hip").value = hi;
+    document.getElementById("catO").value = co;
+    document.getElementById("catA").value = ca;
+
+  }
+  setInterval(function loop() {
+
+    sc = document.getElementById("sca").value;
+
+    ca = document.getElementById("catA").value;
+    co = document.getElementById("catO").value;
+    hi = document.getElementById("Hip").value;
+    type = document.getElementsByName("ic");
+
+
+
+    if (type[0].checked) {
+      if (at != 1) { at = 1;
+        reset(); }
+      hi = Math.sqrt(((co ** 2) + (ca ** 2)));
+      document.getElementById("Hip").value = hi;
+      document.getElementById("bl3").style="display:none;"
+    }
+    else{
+      document.getElementById("bl3").style="display:inline;"
+    }
+    if (type[1].checked) {
+      if (at != 2) { at = 2;
+        reset(); }
+      co = Math.sqrt((hi ** 2) - (ca ** 2));
+      document.getElementById("catO").value = co;document.getElementById("bl2").style="display:none;"
+    }
+    else{
+      document.getElementById("bl2").style="display:inline;"
+    }
+    if (type[2].checked) {
+      if (at != 3) { at = 3;
+        reset(); }
+      ca = Math.sqrt(((hi ** 2) - (co ** 2)));
+      document.getElementById("catA").value = ca;document.getElementById("bl1").style="display:none;"
+    }
+    else{
+      document.getElementById("bl1").style="display:inline;"
+    }
+
+
+
+
+
+
+uniM="Cm"
+    triangulo.clearRect(0, 0, 1000, 1000)
+    
+    triangulo.beginPath()
+    triangulo.moveTo(x, co * sc);
+    triangulo.lineTo(x, y);
+    triangulo.moveTo(x+ hi * sc, co * sc);
+    triangulo.lineTo(x, y);
+    triangulo.moveTo(x + hi * sc, co * sc);
+    triangulo.lineTo(x , co * sc);
+    triangulo.stroke();
+    
+    
+    triangulo.font=(13)+"px bold";
+    triangulo.fillText(("Cateto oposto: "+Math.round(co*1000)/1000)+" "+uniM,0,115);
+    triangulo.fillText(("Cateto adjacente: "+Math.round(ca*1000)/1000)+" "+uniM,0,130);
+triangulo.fillText(("Hipotenusa: "+Math.round(hi*1000)/1000)+" "+uniM,0,145);
+  }, 1);
+</script>
+
+</html>
